@@ -280,8 +280,6 @@
   <div class="panel" id="panel-recipes">
     <div class="topbar">
       <button class="btn btn-main btn-sm" onclick="openForm()">+ 추가</button>
-      <div class="spacer"></div>
-      <button class="btn btn-line btn-sm" onclick="resetRecipes()">기본 레시피로 되돌리기</button>
     </div>
 
     <div class="search-box">
@@ -351,13 +349,6 @@ function saveRecipes(){
   try{
     localStorage.setItem(STORAGE_KEY, JSON.stringify(recipes));
   }catch(e){}
-}
-function resetRecipes(){
-  if(confirm('모든 수정 내용을 지우고 기본 레시피로 되돌릴까요?')){
-    recipes = JSON.parse(JSON.stringify(DEFAULT_RECIPES));
-    try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
-    renderList();
-  }
 }
 
 let recipes = loadRecipes();
