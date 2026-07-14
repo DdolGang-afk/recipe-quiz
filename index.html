@@ -295,7 +295,7 @@
     <div class="topbar">
       <button class="btn btn-main btn-sm" onclick="openForm()">+ 추가</button>
       <div class="spacer"></div>
-      <button class="btn btn-line btn-sm" onclick="exportForPhone()">📱 아이폰용 파일 내보내기</button>
+      <button class="btn btn-line btn-sm" onclick="exportForPhone()">📱 모바일로 내보내기</button>
     </div>
 
     <div class="search-box">
@@ -379,7 +379,7 @@ function exportForPhone(){
   a.download = 'index.html';
   a.click();
   URL.revokeObjectURL(a.href);
-  alert('index.html 파일이 다운로드되었어요!\nGitHub 저장소에 업로드하면 아이폰에 반영됩니다.');
+  alert('index.html 파일이 다운로드되었어요!\nGitHub 저장소에 업로드하면 모바일에 반영됩니다.');
 }
 
 let recipes = loadRecipes();
