@@ -130,13 +130,11 @@
   }
   .ing-list{list-style:none; margin-bottom:8px;}
   .ing-list li{
-    display:flex; justify-content:space-between;
     padding:7px 0; border-bottom:1px dashed var(--line);
     font-size:14px;
   }
-  .ing-list li span:last-child{color:var(--ink-soft); font-weight:500;}
   .steps{
-    font-size:13px; color:var(--ink-soft); white-space:pre-wrap;
+    font-size:13px; color:#222; white-space:pre-wrap;
     margin-top:8px; background:#FCF8F9; border-radius:10px; padding:10px 12px;
   }
   .card-actions{display:flex; gap:8px; margin-top:12px;}
@@ -160,19 +158,19 @@
   textarea{resize:vertical; min-height:90px;}
   .form-actions{display:flex; gap:8px; margin-top:16px;}
   .color-grid{
-    display:grid; grid-template-columns:repeat(7, 1fr);
-    gap:10px; padding:4px 2px;
+    display:flex; flex-wrap:wrap; gap:8px; padding:4px 2px;
   }
   .color-swatch{
-    width:100%; aspect-ratio:1; border-radius:50%;
-    border:none; cursor:pointer; padding:0;
+    width:26px; height:26px; border-radius:50%;
+    border:none; cursor:pointer; padding:0; flex:none;
   }
   .color-swatch.auto{
-    background:#fff; border:2px dashed var(--ink-soft);
+    width:auto; min-width:38px; padding:0 8px; border-radius:999px;
+    background:#fff; border:1.5px dashed var(--ink-soft);
     color:var(--ink-soft); font-size:10px; font-weight:700; font-family:inherit;
   }
   .color-swatch.sel{
-    outline:3px solid var(--ink); outline-offset:2px;
+    outline:2.5px solid var(--ink); outline-offset:2px;
   }
 
   /* ── 플래시카드 ── */
@@ -405,7 +403,7 @@ function renderList(){
       <h3>${esc(r.name)}</h3>
       ${r.cat ? `<span class="cat">${esc(r.cat)}</span>` : ''}
       <ul class="ing-list">
-        ${r.ing.map(x=>`<li><span>${esc(x[0])}</span><span>${esc(x[1])}</span></li>`).join('')}
+        ${r.ing.map(x=>`<li>${esc((x[0]+' '+x[1]).trim())}</li>`).join('')}
       </ul>
       ${r.steps ? `<div class="steps">${esc(r.steps)}</div>` : ''}
       <div class="card-actions">
@@ -430,7 +428,8 @@ const PALETTE = [
   '#C08A00', // 진한황금
   '#8CB832', // 샤인머스캣 연두
   '#4CAF50', // 초록
-  '#2FB08C', // 민트
+  '#2FB08C', // 민트그린
+  '#6FE0C8', // 밝은 민트
   '#00ACC1', // 청록
   '#3BB8D8', // 하늘
   '#4A7FD9', // 파랑
@@ -438,6 +437,7 @@ const PALETTE = [
   '#8E5BC8', // 보라
   '#B14FA8', // 포도 자주
   '#8D6E63', // 카페 브라운
+  '#4E342E', // 다크브라운
   '#78909C'  // 그레이블루
 ];
 function softOf(hex){
@@ -567,7 +567,7 @@ function renderFlash(){
         <div class="fc-face fc-back">
           <h4>${esc(r.name)}</h4>
           <ul class="ing-list">
-            ${r.ing.map(x=>`<li><span>${esc(x[0])}</span><span>${esc(x[1])}</span></li>`).join('')}
+            ${r.ing.map(x=>`<li>${esc((x[0]+' '+x[1]).trim())}</li>`).join('')}
           </ul>
           ${r.steps?`<div class="steps">${esc(r.steps)}</div>`:''}
         </div>
