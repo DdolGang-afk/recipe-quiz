@@ -625,6 +625,15 @@ function renderCatRows(){
 function setListCat(c){ listCat = c; renderCatRows(); renderList(); }
 function setFcCat(c){ fcCat = c; renderCatRows(); fcShowBack = true; fcApplyFilter(); }
 
+// 검색 개선: 이름·카테고리·재료명·용량·만드는법 모두 검색, 띄어쓰기 무시, 여러 단어 AND 검색
+function matchRecipe(r, term){
+  if(!term) return true;
+  const hay = [r.name, r.cat, ...r.ing.map(x=>x[0]+' '+(x[1]||'')), r.steps||'']
+    .join(' ').toLowerCase().replace(/\s+/g,'');
+  return term.toLowerCase().split(/\s+/).filter(Boolean)
+    .every(kw => hay.includes(kw));
+}
+
 function renderList(){
   const box = document.getElementById('recipeList');
   const term = document.getElementById('searchInput').value.trim().toLowerCase();
@@ -637,9 +646,7 @@ function renderList(){
     .map((r,i)=>({r,i}))
     .filter(({r})=>{
       if(listCat!=='전체' && r.cat!==listCat) return false;
-      if(!term) return true;
-      const hay = [r.name, r.cat, ...r.ing.map(x=>x[0])].join(' ').toLowerCase();
-      return hay.includes(term);
+      return matchRecipe(r, term);
     });
   if(shown.length===0){
     box.innerHTML = term
@@ -788,9 +795,7 @@ function fcApplyFilter(){
     .map((r,i)=>({r,i}))
     .filter(({r})=>{
       if(fcCat!=='전체' && r.cat!==fcCat) return false;
-      if(!term) return true;
-      const hay = [r.name, r.cat, ...r.ing.map(x=>x[0])].join(' ').toLowerCase();
-      return hay.includes(term);
+      return matchRecipe(r, term);
     })
     .map(({i})=>i);
   if(fcOrder.length===0){
@@ -944,6 +949,24 @@ function renderQ(){
     <div class="q-next" id="qNext"></div>`;
 }
 let audioCtx;
+function playCorrect(){
+  try{
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    const t = audioCtx.currentTime;
+    // 띠링♪ 상승하는 두 음 (E5 → A5)
+    [[660,0],[880,0.12]].forEach(([f,d])=>{
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type = 'sine';
+      o.frequency.setValueAtTime(f, t+d);
+      g.gain.setValueAtTime(0.0001, t+d);
+      g.gain.linearRampToValueAtTime(0.2, t+d+0.02);
+      g.gain.exponentialRampToValueAtTime(0.001, t+d+0.28);
+      o.connect(g); g.connect(audioCtx.destination);
+      o.start(t+d); o.stop(t+d+0.3);
+    });
+  }catch(e){}
+}
 function playWrong(){
   try{
     audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
@@ -968,6 +991,7 @@ function answer(btn, chosen){
   b.state = 'done';
   b.correct = (chosen === b.answer);
   if(b.correct){
+    playCorrect(); // 정답 사운드
     qScore++;
     setTimeout(nextStep, 700); // 정답이면 바로 다음으로
   }else{
