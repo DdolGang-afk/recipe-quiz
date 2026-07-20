@@ -664,11 +664,21 @@ function renderList(){
       ${r.steps ? `<div class="steps">${esc(r.steps)}</div>` : ''}
       <div class="card-actions">
         <button class="btn btn-line btn-sm" onclick="openForm(${i})">수정</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteRecipe(${i})">삭제</button>
       </div>
     </div>`).join('');
 }
 function clearSearch(){
   document.getElementById('searchInput').value = '';
+  renderList();
+}
+function deleteRecipe(i){
+  const name = recipes[i] ? recipes[i].name : '';
+  if(!confirm(`"${name}" 레시피를 삭제할까요?\n삭제하면 되돌릴 수 없어요.`)) return;
+  recipes.splice(i, 1);
+  saveRecipes(); // 자동 저장
+  closeForm();   // 혹시 수정 창이 열려 있으면 닫기 (번호가 밀리는 것 방지)
+  renderCatRows();
   renderList();
 }
 function esc(s){return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
