@@ -1884,15 +1884,15 @@ function showTab(t){
 const FIXED_CATS = ['커피','Non 커피 라떼','에이드','스무디&프라페','주스','Tea','흑당','콜드브루','베이스'];
 const CAT_COLORS = {
   '전체':        '#41333F',  // 잉크
-  '커피':        '#8D6E63',  // 카페 브라운
-  'Non 커피 라떼':    '#8E5BC8',  // 보라
-  '에이드':      '#2FB08C',  // 민트
-  '스무디&프라페':'#F26B8A', // 핑크
-  '주스':        '#EF4B4B',  // 레드
-  'Tea':         '#4CAF50',  // 그린
-  '흑당':        '#C08A00',  // 진한황금
-  '콜드브루':    '#4E342E',  // 다크브라운
-  '베이스':      '#4A7FD9'   // 파랑
+  '커피':        '#B0592E',  // 선명한 카라멜
+  'Non 커피 라떼':    '#A430E8',  // 형광 보라
+  '에이드':      '#00C9A7',  // 형광 민트
+  '스무디&프라페':'#FF2D87', // 형광 핑크
+  '주스':        '#FF3B30',  // 비비드 레드
+  'Tea':         '#3DD13D',  // 형광 그린
+  '흑당':        '#E0A500',  // 밝은 황금
+  '콜드브루':    '#6D4030',  // 진한 브라운
+  '베이스':      '#2E7BFF'   // 형광 블루
 };
 let listCat = '전체', fcCat = '전체';
 function allCats(){
@@ -1904,8 +1904,8 @@ function renderCatRows(){
   const mk = (sel, fn) => allCats().map(c=>{
     const col = CAT_COLORS[c] || '#78909C';
     const style = sel===c
-      ? `background:${col};color:#fff`
-      : `background:${softOf(col)};color:${col}`;
+      ? `background:${chipBgOn(col)};color:#fff;box-shadow:0 0 12px ${col}80`
+      : `background:${chipBg(col)};color:${chipText(col)}`;
     return `<button class="cat-chip${sel===c?' on':''}" style="${style}" data-cat="${esc(c)}" onclick="${fn}(this.dataset.cat)">${esc(c)}</button>`;
   }).join('');
   document.getElementById('listCatRow').innerHTML = mk(listCat, 'setListCat');
@@ -2040,6 +2040,28 @@ function softOf(hex){
   const r = (n>>16)&255, g = (n>>8)&255, b = n&255;
   const mix = v => Math.round(v + (255-v)*0.86);
   return `rgb(${mix(r)},${mix(g)},${mix(b)})`;
+}
+// 카테고리 버튼용 — 배경에 묻히지 않게 더 선명하게 (그라데이션)
+function chipBg(hex){
+  const n = parseInt(hex.slice(1), 16);
+  const r = (n>>16)&255, g = (n>>8)&255, b = n&255;
+  const mix = (v, amt) => Math.round(v + (255-v)*amt);
+  const light = `rgb(${mix(r,0.82)},${mix(g,0.82)},${mix(b,0.82)})`; // 연한 쪽
+  const deep  = `rgb(${mix(r,0.62)},${mix(g,0.62)},${mix(b,0.62)})`; // 진한 쪽
+  return `linear-gradient(135deg, ${light}, ${deep})`;
+}
+// 선택된 버튼용 — 진한 색 그라데이션
+function chipBgOn(hex){
+  const n = parseInt(hex.slice(1), 16);
+  const r = (n>>16)&255, g = (n>>8)&255, b = n&255;
+  const lighten = v => Math.round(v + (255-v)*0.28);
+  return `linear-gradient(135deg, rgb(${lighten(r)},${lighten(g)},${lighten(b)}), ${hex})`;
+}
+// 칩 글씨용 — 그라데이션 배경 위에서도 잘 보이게 진하게
+function chipText(hex){
+  const n = parseInt(hex.slice(1), 16);
+  const dark = v => Math.round(v * 0.62);
+  return `rgb(${dark((n>>16)&255)},${dark((n>>8)&255)},${dark(n&255)})`;
 }
 let fSelColor = null;
 function renderColorGrid(){
