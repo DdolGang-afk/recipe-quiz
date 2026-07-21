@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko"><plasmo-csui></plasmo-csui><head></head><body><plasmo-csui></plasmo-csui><plasmo-csui></plasmo-csui><plasmo-csui></plasmo-csui>
+<html lang="ko"><head></head><body><plasmo-csui></plasmo-csui><plasmo-csui></plasmo-csui><plasmo-csui></plasmo-csui><plasmo-csui></plasmo-csui>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -318,16 +318,16 @@
   <!-- ── 레시피 탭 ── -->
   <div class="panel on" id="panel-recipes">
     <div class="topbar">
-      <button class="btn btn-main btn-sm" onclick="openForm()">+ 추가</button>
+      <button class="btn btn-main btn-sm" onclick="listDetail=null; openForm()">+ 추가</button>
       <div class="spacer"></div>
       <button class="btn btn-line btn-sm" onclick="exportForPhone()">📱 모바일로 내보내기</button>
     </div>
 
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="🔍 메뉴명 · 재료 · 카테고리 검색" oninput="renderList()">
+      <input type="text" id="searchInput" placeholder="🔍 메뉴명 · 재료 · 카테고리 검색" oninput="listDetail=null; renderList()">
       <button class="search-clear" id="searchClear" onclick="clearSearch()" style="display: none;">✕</button>
     </div>
-    <div class="cat-row" id="listCatRow"><button class="cat-chip" style="background:rgb(228,226,228);color:#41333F" data-cat="전체" onclick="setListCat(this.dataset.cat)">전체</button><button class="cat-chip" style="background:rgb(239,235,233);color:#8D6E63" data-cat="커피" onclick="setListCat(this.dataset.cat)">커피</button><button class="cat-chip" style="background:rgb(239,232,247);color:#8E5BC8" data-cat="Non 커피 라떼" onclick="setListCat(this.dataset.cat)">Non 커피 라떼</button><button class="cat-chip" style="background:rgb(226,244,239);color:#2FB08C" data-cat="에이드" onclick="setListCat(this.dataset.cat)">에이드</button><button class="cat-chip" style="background:rgb(253,234,239);color:#F26B8A" data-cat="스무디&amp;프라페" onclick="setListCat(this.dataset.cat)">스무디&amp;프라페</button><button class="cat-chip" style="background:rgb(253,230,230);color:#EF4B4B" data-cat="주스" onclick="setListCat(this.dataset.cat)">주스</button><button class="cat-chip" style="background:rgb(230,244,231);color:#4CAF50" data-cat="Tea" onclick="setListCat(this.dataset.cat)">Tea</button><button class="cat-chip on" style="background:#C08A00;color:#fff" data-cat="흑당" onclick="setListCat(this.dataset.cat)">흑당</button><button class="cat-chip" style="background:rgb(230,227,226);color:#4E342E" data-cat="콜드브루" onclick="setListCat(this.dataset.cat)">콜드브루</button><button class="cat-chip" style="background:rgb(230,237,250);color:#4A7FD9" data-cat="베이스" onclick="setListCat(this.dataset.cat)">베이스</button></div>
+    <div class="cat-row" id="listCatRow"><button class="cat-chip on" style="background:#41333F;color:#fff" data-cat="전체" onclick="setListCat(this.dataset.cat)">전체</button><button class="cat-chip" style="background:rgb(239,235,233);color:#8D6E63" data-cat="커피" onclick="setListCat(this.dataset.cat)">커피</button><button class="cat-chip" style="background:rgb(239,232,247);color:#8E5BC8" data-cat="Non 커피 라떼" onclick="setListCat(this.dataset.cat)">Non 커피 라떼</button><button class="cat-chip" style="background:rgb(226,244,239);color:#2FB08C" data-cat="에이드" onclick="setListCat(this.dataset.cat)">에이드</button><button class="cat-chip" style="background:rgb(253,234,239);color:#F26B8A" data-cat="스무디&amp;프라페" onclick="setListCat(this.dataset.cat)">스무디&amp;프라페</button><button class="cat-chip" style="background:rgb(253,230,230);color:#EF4B4B" data-cat="주스" onclick="setListCat(this.dataset.cat)">주스</button><button class="cat-chip" style="background:rgb(230,244,231);color:#4CAF50" data-cat="Tea" onclick="setListCat(this.dataset.cat)">Tea</button><button class="cat-chip" style="background:rgb(246,239,219);color:#C08A00" data-cat="흑당" onclick="setListCat(this.dataset.cat)">흑당</button><button class="cat-chip" style="background:rgb(230,227,226);color:#4E342E" data-cat="콜드브루" onclick="setListCat(this.dataset.cat)">콜드브루</button><button class="cat-chip" style="background:rgb(230,237,250);color:#4A7FD9" data-cat="베이스" onclick="setListCat(this.dataset.cat)">베이스</button></div>
 
     <div class="form-box" id="formBox" style="display: none;">
       <h3 id="formTitle">레시피 수정</h3>
@@ -344,7 +344,7 @@
 2. 에스프레소를 붓는다
 3. 스팀우유를 붓는다"></textarea>
       <label>메뉴 색상 <small>(선택 — 안 고르면 자동)</small></label>
-      <div class="color-grid" id="colorGrid"><button type="button" class="color-swatch auto" onclick="pickColor(null)" title="자동">자동</button><button type="button" class="color-swatch" style="background:#F26B8A" onclick="pickColor('#F26B8A')"></button><button type="button" class="color-swatch" style="background:#F7907B" onclick="pickColor('#F7907B')"></button><button type="button" class="color-swatch" style="background:#F25C4D" onclick="pickColor('#F25C4D')"></button><button type="button" class="color-swatch" style="background:#EF4B4B" onclick="pickColor('#EF4B4B')"></button><button type="button" class="color-swatch" style="background:#E91E63" onclick="pickColor('#E91E63')"></button><button type="button" class="color-swatch" style="background:#F58220" onclick="pickColor('#F58220')"></button><button type="button" class="color-swatch" style="background:#FFB300" onclick="pickColor('#FFB300')"></button><button type="button" class="color-swatch" style="background:#DFAF1F" onclick="pickColor('#DFAF1F')"></button><button type="button" class="color-swatch" style="background:#C08A00" onclick="pickColor('#C08A00')"></button><button type="button" class="color-swatch" style="background:#8CB832" onclick="pickColor('#8CB832')"></button><button type="button" class="color-swatch" style="background:#4CAF50" onclick="pickColor('#4CAF50')"></button><button type="button" class="color-swatch" style="background:#2FB08C" onclick="pickColor('#2FB08C')"></button><button type="button" class="color-swatch" style="background:#6FE0C8" onclick="pickColor('#6FE0C8')"></button><button type="button" class="color-swatch" style="background:#00ACC1" onclick="pickColor('#00ACC1')"></button><button type="button" class="color-swatch" style="background:#3BB8D8" onclick="pickColor('#3BB8D8')"></button><button type="button" class="color-swatch" style="background:#4A7FD9" onclick="pickColor('#4A7FD9')"></button><button type="button" class="color-swatch" style="background:#5C6BC0" onclick="pickColor('#5C6BC0')"></button><button type="button" class="color-swatch" style="background:#8E5BC8" onclick="pickColor('#8E5BC8')"></button><button type="button" class="color-swatch" style="background:#B14FA8" onclick="pickColor('#B14FA8')"></button><button type="button" class="color-swatch" style="background:#8D6E63" onclick="pickColor('#8D6E63')"></button><button type="button" class="color-swatch sel" style="background:#4E342E" onclick="pickColor('#4E342E')"></button><button type="button" class="color-swatch" style="background:#78909C" onclick="pickColor('#78909C')"></button></div>
+      <div class="color-grid" id="colorGrid"><button type="button" class="color-swatch auto" onclick="pickColor(null)" title="자동">자동</button><button type="button" class="color-swatch" style="background:#F26B8A" onclick="pickColor('#F26B8A')"></button><button type="button" class="color-swatch" style="background:#F7907B" onclick="pickColor('#F7907B')"></button><button type="button" class="color-swatch" style="background:#F25C4D" onclick="pickColor('#F25C4D')"></button><button type="button" class="color-swatch" style="background:#EF4B4B" onclick="pickColor('#EF4B4B')"></button><button type="button" class="color-swatch" style="background:#E91E63" onclick="pickColor('#E91E63')"></button><button type="button" class="color-swatch" style="background:#F58220" onclick="pickColor('#F58220')"></button><button type="button" class="color-swatch" style="background:#FFB300" onclick="pickColor('#FFB300')"></button><button type="button" class="color-swatch" style="background:#DFAF1F" onclick="pickColor('#DFAF1F')"></button><button type="button" class="color-swatch sel" style="background:#C08A00" onclick="pickColor('#C08A00')"></button><button type="button" class="color-swatch" style="background:#8CB832" onclick="pickColor('#8CB832')"></button><button type="button" class="color-swatch" style="background:#4CAF50" onclick="pickColor('#4CAF50')"></button><button type="button" class="color-swatch" style="background:#2FB08C" onclick="pickColor('#2FB08C')"></button><button type="button" class="color-swatch" style="background:#6FE0C8" onclick="pickColor('#6FE0C8')"></button><button type="button" class="color-swatch" style="background:#00ACC1" onclick="pickColor('#00ACC1')"></button><button type="button" class="color-swatch" style="background:#3BB8D8" onclick="pickColor('#3BB8D8')"></button><button type="button" class="color-swatch" style="background:#4A7FD9" onclick="pickColor('#4A7FD9')"></button><button type="button" class="color-swatch" style="background:#5C6BC0" onclick="pickColor('#5C6BC0')"></button><button type="button" class="color-swatch" style="background:#8E5BC8" onclick="pickColor('#8E5BC8')"></button><button type="button" class="color-swatch" style="background:#B14FA8" onclick="pickColor('#B14FA8')"></button><button type="button" class="color-swatch" style="background:#8D6E63" onclick="pickColor('#8D6E63')"></button><button type="button" class="color-swatch" style="background:#4E342E" onclick="pickColor('#4E342E')"></button><button type="button" class="color-swatch" style="background:#78909C" onclick="pickColor('#78909C')"></button></div>
       <div class="form-actions">
         <button class="btn btn-green" style="flex:1" onclick="saveRecipe()">저장</button>
         <button class="btn btn-line" onclick="closeForm()">취소</button>
@@ -352,7 +352,1163 @@
     </div>
 
     <div id="recipeList">
-    <div class="recipe-card open" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
+    <div class="recipe-card open" style="--cat:#C08A00;--cat-soft:rgb(246,239,219)">
+      <div class="card-head" onclick="toggleCard(37)">
+        <h3>곡물 라떼</h3>
+        <span class="cat">Non 커피 라떼</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>우유 300ml</li><li>곡물파우더 4래들</li><li>슈가시럽 1P</li><li>갈갈갈</li><li>얼음</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(37)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(37)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#FFB300;--cat-soft:rgb(255,244,219)">
+      <div class="card-head" onclick="toggleCard(42)">
+        <h3>골드 망고 스무디</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>물 150ml</li><li>골드망고베이스 3.5P</li><li>해동망고 6개</li><li>얼음 2스쿱</li><li>갈갈갈</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(42)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(42)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#F58220;--cat-soft:rgb(254,238,224)">
+      <div class="card-head" onclick="toggleCard(69)">
+        <h3>귤 톡톡 젤리 스무디</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>물 150ml</li><li>귤베이스 5래들</li><li>슈가시럽 1P</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>컵 밑선 감귤 워터 젤리</li><li>담기</li><li>애플민트 토핑</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(69)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(69)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#E91E63;--cat-soft:rgb(252,224,233)">
+      <div class="card-head" onclick="toggleCard(6)">
+        <h3>꿀 수박 주스</h3>
+        <span class="cat">주스</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>수박주스 300ml</li><li>냉동수박다이스 2스쿱</li><li>갈갈갈</li><li>얼음</li><li>담기</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(6)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(6)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#4CAF50;--cat-soft:rgb(230,244,231)">
+      <div class="card-head" onclick="toggleCard(11)">
+        <h3>녹차 베이스</h3>
+        <span class="cat">베이스</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>뜨거운 물 500ml</li><li>녹차파우더 500g</li><li>갈갈갈</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(11)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(11)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#4CAF50;--cat-soft:rgb(230,244,231)">
+      <div class="card-head" onclick="toggleCard(48)">
+        <h3>녹차 프라페</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>쿠키베이스 150ml</li><li>녹차베이스 150ml</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>휘핑</li><li>녹차파우더 톡톡</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(48)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(48)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#EF4B4B;--cat-soft:rgb(253,230,230)">
+      <div class="card-head" onclick="toggleCard(57)">
+        <h3>딸기 바나나 주스</h3>
+        <span class="cat">주스</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>우유 100ml</li><li>물 100ml</li><li>딸기바나나 원팩</li><li>갈갈갈</li><li>얼음</li><li>담기</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(57)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(57)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#E91E63;--cat-soft:rgb(252,224,233)">
+      <div class="card-head" onclick="toggleCard(40)">
+        <h3>딸기 요거트 스무디</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>우유 150ml</li><li>가당딸기 150ml</li><li>요거트파우더 3래들</li><li>얼음 2스쿱</li><li>갈갈갈</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(40)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(40)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#E91E63;--cat-soft:rgb(252,224,233)">
+      <div class="card-head" onclick="toggleCard(46)">
+        <h3>딸기 쿠키 프라페</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>쿠키베이스 150ml</li><li>우유 150ml</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>딸기소스 2P</li><li>마블링</li><li>컵 바닥 쿠키분태 2래들</li><li>담기</li><li>휘핑</li><li>딸기분태</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(46)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(46)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#E91E63;--cat-soft:rgb(252,224,233)">
+      <div class="card-head" onclick="toggleCard(34)">
+        <h3>딸기라떼</h3>
+        <span class="cat">Non 커피 라떼</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>가당딸기 200ml</li><li>슈가시럽 3P</li><li>우유</li><li>얼음</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(34)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(34)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#E91E63;--cat-soft:rgb(252,224,233)">
+      <div class="card-head" onclick="toggleCard(54)">
+        <h3>딸기퐁 크러쉬</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>쿠키베이스 150ml</li><li>우유 150ml</li><li>딸기소스 1P</li><li>죠리퐁 1컵</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>컵 밑선 죠리퐁</li><li>담기</li><li>죠리퐁 가득 토핑</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(54)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(54)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#8CB832;--cat-soft:rgb(239,245,226)">
+      <div class="card-head" onclick="toggleCard(8)">
+        <h3>라임 모히또</h3>
+        <span class="cat">에이드</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>모히또시럽 4P</li><li>라임시럽 3P</li><li>라임슬라이스 4개</li><li>애플민트 한 줌</li><li>콩콩콩</li><li>얼음</li><li>사이다</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(8)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(8)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#FFB300;--cat-soft:rgb(255,244,219)">
+      <div class="card-head" onclick="toggleCard(18)">
+        <h3>레몬에이드</h3>
+        <span class="cat">에이드</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>레몬베이스 2P</li><li>슈가시럽 1P</li><li>얼음</li><li>사이다</li><li>레몬슬라이스 1개</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(18)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(18)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#FFB300;--cat-soft:rgb(255,244,219)">
+      <div class="card-head" onclick="toggleCard(29)">
+        <h3>레몬차</h3>
+        <span class="cat">Tea</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>HOT - 레몬청 5래들</li><li>ICD - 레몬청 6래들</li><li>레몬슬라이스 1개</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(29)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(29)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#F7907B;--cat-soft:rgb(254,239,237)">
+      <div class="card-head" onclick="toggleCard(35)">
+        <h3>로얄 밀크티</h3>
+        <span class="cat">Non 커피 라떼</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>우유 300ml</li><li>홍차파우더 2래들</li><li>갈갈갈</li><li>얼음</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(35)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(35)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#8D6E63;--cat-soft:rgb(239,235,233)">
+      <div class="card-head" onclick="toggleCard(47)">
+        <h3>리얼 초코 프라페</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>쿠키베이스 100ml</li><li>초코베이스 150ml</li><li>초콜릿칩 1래들</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>휘핑</li><li>초코&amp;카라멜드리즐</li><li>딸기분태</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(47)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(47)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#F58220;--cat-soft:rgb(254,238,224)">
+      <div class="card-head" onclick="toggleCard(39)">
+        <h3>망고 요거트 스무디</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>우유 250ml</li><li>요거트파우더 3래들</li><li>골드망고베이스 1P</li><li>해동망고 10개</li><li>얼음 2스쿱</li><li>갈갈갈</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(39)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(39)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#F25C4D;--cat-soft:rgb(253,232,230)">
+      <div class="card-head" onclick="toggleCard(60)">
+        <h3>멋쟁이 토마토 스무디</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>물 150ml</li><li>토마토베이스 4P</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>담기</li><li>와작펄슈가 2t래들</li><li>애플민트 토핑</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(60)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(60)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#F25C4D;--cat-soft:rgb(253,232,230)">
+      <div class="card-head" onclick="toggleCard(5)">
+        <h3>메가 에이드</h3>
+        <span class="cat">에이드</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>메가에이드베이스 2P</li><li>과일슬라이스 3종 각 2개씩</li><li>콩콩콩</li><li>얼음</li><li>사이다</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(5)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(5)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#6FE0C8;--cat-soft:rgb(235,251,247)">
+      <div class="card-head" onclick="toggleCard(50)">
+        <h3>민트 프라페</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>우유 200ml</li><li>민트파우더 5래들</li><li>민트시럽 3P</li><li>초콜릿칩 1래들</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>휘핑</li><li>딸기 분태 톡톡톡</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(50)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(50)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#3BB8D8;--cat-soft:rgb(228,245,250)">
+      <div class="card-head" onclick="toggleCard(64)">
+        <h3>밀크쉐이크</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>우유 200ml</li><li>밀크쉐이크 파우더 5래들</li><li>얼음 2스쿱</li><li>갈갈갈</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(64)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(64)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#FFB300;--cat-soft:rgb(255,244,219)">
+      <div class="card-head" onclick="toggleCard(53)">
+        <h3>바나나퐁 크러쉬</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>쿠키베이스 150ml</li><li>우유 150ml</li><li>슈가시럽 1P</li><li>죠리퐁 1컵</li><li>바나나파우더 2래들</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>컵 밑선 죠리퐁</li><li>담기</li><li>죠리퐁 가득 토핑</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(53)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(53)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#F7907B;--cat-soft:rgb(254,239,237)">
+      <div class="card-head" onclick="toggleCard(0)">
+        <h3>복숭아 퐁당 요거트 스무디</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>우유 200ml</li><li>요거트파우더 3래들</li><li>복숭아베이스 3P</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>컵 벽면 복숭아베이스 1P</li><li>담기</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(0)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(0)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#4A7FD9;--cat-soft:rgb(230,237,250)">
+      <div class="card-head" onclick="toggleCard(19)">
+        <h3>블루레몬에이드</h3>
+        <span class="cat">에이드</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>블루큐라소시럽 2P</li><li>레몬베이스 2P</li><li>얼음</li><li>사이다</li><li>레몬슬라이스 1개</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(19)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(19)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#5C6BC0;--cat-soft:rgb(232,234,246)">
+      <div class="card-head" onclick="toggleCard(2)">
+        <h3>블루베리 요거트 스무디</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>우유 200ml</li><li>요거트파우더 3래들</li><li>블루베리베이스 3P</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>컵 벽면 블루베리베이스 1P</li><li>담기</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(2)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(2)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#E91E63;--cat-soft:rgb(252,224,233)">
+      <div class="card-head" onclick="toggleCard(32)">
+        <h3>사과 유자차</h3>
+        <span class="cat">Tea</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>애플티백 1개</li><li>유자청 4래들</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(32)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(32)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#F7907B;--cat-soft:rgb(254,239,237)">
+      <div class="card-head" onclick="toggleCard(66)">
+        <h3>상큼 리치티</h3>
+        <span class="cat">Tea</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>HOT - 리치베이스 100ml</li><li>ICE - 리치베이스 컵 밑선</li><li>물</li><li>냉동레드커런트 1래들 토핌</li><li>로즈마리 토핑</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(66)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(66)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#FFB300;--cat-soft:rgb(255,244,219)">
+      <div class="card-head" onclick="toggleCard(56)">
+        <h3>슈크림 허니퐁 크러쉬</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>쿠키베이스 150ml</li><li>우유 150ml</li><li>죠리퐁 1컵</li><li>슈크림파우더 3래들</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>담기</li><li>허니퐁 가득 토핑</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(56)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(56)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#E91E63;--cat-soft:rgb(252,224,233)">
+      <div class="card-head" onclick="toggleCard(41)">
+        <h3>스트로베리 치즈 홀릭</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>우유 150ml</li><li>가당딸기 150ml</li><li>요거트파우더 3래들</li><li>슈가시럽 1P</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>휘핑</li><li>치즈큐브 6개</li><li>딸기분태</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(41)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(41)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#8CB832;--cat-soft:rgb(239,245,226)">
+      <div class="card-head" onclick="toggleCard(24)">
+        <h3>아이스 녹차라떼</h3>
+        <span class="cat">Non 커피 라떼</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>녹차베이스 컵 밑선</li><li>얼음</li><li>우유</li><li>섞기</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(24)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(24)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#8D6E63;--cat-soft:rgb(239,235,233)">
+      <div class="card-head" onclick="toggleCard(22)">
+        <h3>아이스 초코</h3>
+        <span class="cat">Non 커피 라떼</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>우유 300ml</li><li>초코파우더 4래들</li><li>갈갈갈</li><li>얼음</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(22)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(22)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
+      <div class="card-head" onclick="toggleCard(10)">
+        <h3>아이스 카라멜마끼아또</h3>
+        <span class="cat">커피</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>카라멜시럽 4P</li><li>에스프레소 2샷</li><li>얼음</li><li>우유거품기</li><li>카라멜드리즐</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(10)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(10)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#F25C4D;--cat-soft:rgb(253,232,230)">
+      <div class="card-head" onclick="toggleCard(14)">
+        <h3>아이스티 베이스</h3>
+        <span class="cat">베이스</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>뜨거운 물 900ml</li><li>아이스티파우더 1봉</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(14)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(14)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#4CAF50;--cat-soft:rgb(230,244,231)">
+      <div class="card-head" onclick="toggleCard(1)">
+        <h3>애플 머스캣 요거트 스무디</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>우유 200ml</li><li>요거트파우더 3래들</li><li>애플머스캣베이스 3P</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>컵 벽면 애플머스캣베이스 1P</li><li>담기</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(1)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(1)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#8D6E63;--cat-soft:rgb(239,235,233)">
+      <div class="card-head" onclick="toggleCard(44)">
+        <h3>오레오 초코라떼</h3>
+        <span class="cat">Non 커피 라떼</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>우유 200ml</li><li>초코베이스 50ml</li><li>오레오 3개</li><li>갈갈갈 5초</li><li>얼음</li><li>담기</li><li>휘핑</li><li>오레오 1개</li><li>쿠키분태</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(44)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(44)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#E91E63;--cat-soft:rgb(252,224,233)">
+      <div class="card-head" onclick="toggleCard(65)">
+        <h3>왕 메가 사과 유자차</h3>
+        <span class="cat">Tea</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>애플티백 2개</li><li>유자청 6래들</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(65)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(65)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
+      <div class="card-head" onclick="toggleCard(68)">
+        <h3>왕메가 헛개리카노</h3>
+        <span class="cat">커피</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>헛개베이스 5P</li><li>물</li><li>얼음</li><li>에스프레소 3샷</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(68)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(68)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#5C6BC0;--cat-soft:rgb(232,234,246)">
+      <div class="card-head" onclick="toggleCard(58)">
+        <h3>유니콘 매직 에이드 (블루)</h3>
+        <span class="cat">에이드</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>모히또시럽 1P</li><li>라임시럽 2P</li><li>블루큐라소시럽 2p</li><li>얼음</li><li>라임슬라이스 1개</li><li>사이다</li><li>그라데이션베이스 75ml</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(58)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(58)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#8E5BC8;--cat-soft:rgb(239,232,247)">
+      <div class="card-head" onclick="toggleCard(51)">
+        <h3>유니콘 프라페</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>쿠키베이스 150ml</li><li>우유 100ml</li><li>그라데이션파우더 2래들</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>컵 벽에 블루소스드리즐 불규칙하게 삥~삥~</li><li>절반 담기</li><li>레몬즙 한바퀴</li><li>나머지 담기</li><li>휘핑</li><li>레몬즙 톡톡</li><li>그라데이션파우더 톡톡</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(51)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(51)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#FFB300;--cat-soft:rgb(255,244,219)">
+      <div class="card-head" onclick="toggleCard(28)">
+        <h3>유자차</h3>
+        <span class="cat">Tea</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>HOT - 유자청 5래들</li><li>ICE - 유자청 6래들</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(28)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(28)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#EF4B4B;--cat-soft:rgb(253,230,230)">
+      <div class="card-head" onclick="toggleCard(3)">
+        <h3>자몽 톡톡 스무디</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>물 200ml</li><li>자몽톡톡베이스 4P</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>컵 벽면 자몽톡톡베이스 1P</li><li>담기</li><li>자몽셀 1스푼 토핑 (옵션추가 시 1스푼씩 추가)</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(3)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(3)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#EF4B4B;--cat-soft:rgb(253,230,230)">
+      <div class="card-head" onclick="toggleCard(20)">
+        <h3>자몽에이드</h3>
+        <span class="cat">에이드</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>자몽베이스 1P</li><li>자몽시럽 1P</li><li>슈가시럽 1P</li><li>얼음</li><li>사이다</li><li>자몽슬라이스 1개</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(20)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(20)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#F25C4D;--cat-soft:rgb(253,232,230)">
+      <div class="card-head" onclick="toggleCard(30)">
+        <h3>자몽차</h3>
+        <span class="cat">Tea</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>HOT - 자몽청 4래들, 설탕시럽 2P</li><li>ICE - 자몽청 4래들, 설탕시럽 1P</li><li>자몽슬라이스 1개</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(30)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(30)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#DFAF1F;--cat-soft:rgb(251,244,224)">
+      <div class="card-head" onclick="toggleCard(7)">
+        <h3>저당 꿀배 XO 야쿠르트</h3>
+        <span class="cat">에이드</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>꿀배베이스 컵 밑선</li><li>얼음</li><li>요구르트 2개</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(7)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(7)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#8CB832;--cat-soft:rgb(239,245,226)">
+      <div class="card-head" onclick="toggleCard(21)">
+        <h3>제로 레몬 말차 아이스티</h3>
+        <span class="cat">에이드</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>제로레몬말차베이스 MGC선</li><li>물</li><li>얼음</li><li>레몬슬라이스 1개</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(21)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(21)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#DFAF1F;--cat-soft:rgb(251,244,224)">
+      <div class="card-head" onclick="toggleCard(4)">
+        <h3>제로 부스트 에이드</h3>
+        <span class="cat">에이드</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>부스터베이스 2P</li><li>레몬슬라이스 1개</li><li>얼음</li><li>제로사이다</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(4)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(4)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#F7907B;--cat-soft:rgb(254,239,237)">
+      <div class="card-head" onclick="toggleCard(33)">
+        <h3>제로 슈가 아이스티</h3>
+        <span class="cat">Tea</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>제로슈가 아이스티베이스 5P</li><li>물</li><li>얼음</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(33)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(33)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#E91E63;--cat-soft:rgb(252,224,233)">
+      <div class="card-head" onclick="toggleCard(13)">
+        <h3>체리 베이스</h3>
+        <span class="cat">베이스</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>뜨거운 물 500ml</li><li>체리파우더 1통</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(13)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(13)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#E91E63;--cat-soft:rgb(252,224,233)">
+      <div class="card-head" onclick="toggleCard(17)">
+        <h3>체리콕</h3>
+        <span class="cat">에이드</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>체리베이스 컵 밑선</li><li>얼음</li><li>콜라</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(17)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(17)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#FFB300;--cat-soft:rgb(255,244,219)">
+      <div class="card-head" onclick="toggleCard(67)">
+        <h3>초당 옥수수 스무디</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>우유 150ml</li><li>우유 빙수 베이스  50ml</li><li>슈가시럽 2P</li><li>초당 옥수수 파우더 4래들</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>담기</li><li>초당옥수수콘 2래들 토핑</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(67)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(67)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#8D6E63;--cat-soft:rgb(239,235,233)">
+      <div class="card-head" onclick="toggleCard(12)">
+        <h3>초코 베이스</h3>
+        <span class="cat">베이스</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>뜨거운 물 1100ml</li><li>초코파우더 1봉</li><li>갈갈갈</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(12)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(12)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#8D6E63;--cat-soft:rgb(239,235,233)">
+      <div class="card-head" onclick="toggleCard(26)">
+        <h3>초코 젤라또 말차 라떼</h3>
+        <span class="cat">Non 커피 라떼</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>녹차베이스 컵 밑선</li><li>컵 상단 안쪽 초코소스 삥~</li><li>얼음</li><li>우유</li><li>에스프레소 1샷</li><li>초코젤라또 1스쿱</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(26)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(26)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#8D6E63;--cat-soft:rgb(239,235,233)">
+      <div class="card-head" onclick="toggleCard(55)">
+        <h3>초코 허니퐁 크러쉬</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>쿠키베이스 150ml</li><li>우유 150ml</li><li>죠리퐁 1컵</li><li>초코파우더 2래들</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>담기</li><li>허니퐁 가득 토핑</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(55)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(55)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
+      <div class="card-head" onclick="toggleCard(49)">
+        <h3>커피 프라페</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>쿠키베이스 250ml</li><li>식힌 샷 2샷</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>휘핑</li><li>카라멜드리즐</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(49)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(49)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#8D6E63;--cat-soft:rgb(239,235,233)">
+      <div class="card-head" onclick="toggleCard(43)">
+        <h3>코코넛 커피 스무디</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>코코넛베이스 250ml</li><li>코코넛칩 1래들</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>컵 바닥 식힌 샷 50ml</li><li>담기</li><li>코코넛칩 1래들 토핑</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(43)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(43)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
+      <div class="card-head" onclick="toggleCard(27)">
+        <h3>콜드브루</h3>
+        <span class="cat">콜드브루</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>HOT - 100ml</li><li>ICE - 컵 밑선</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(27)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(27)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#3BB8D8;--cat-soft:rgb(228,245,250)">
+      <div class="card-head" onclick="toggleCard(16)">
+        <h3>쿠키 베이스</h3>
+        <span class="cat">베이스</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>우유 900ml</li><li>쿠키베이스파우더 425g</li><li>갈갈갈</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(16)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(16)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#8D6E63;--cat-soft:rgb(239,235,233)">
+      <div class="card-head" onclick="toggleCard(45)">
+        <h3>쿠키 프라페</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>쿠키베이스 250ml</li><li>쿠키분태 3래들</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>컵 바닥 쿠키분태 1래들</li><li>담기</li><li>휘핑</li><li>오레오 2개</li><li>쿠키분태 톡톡톡</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(45)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(45)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#8D6E63;--cat-soft:rgb(239,235,233)">
+      <div class="card-head" onclick="toggleCard(36)">
+        <h3>토피넛라떼</h3>
+        <span class="cat">Non 커피 라떼</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>우유 300ml</li><li>토피넛파우더 4래들</li><li>갈갈갈</li><li>얼음</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(36)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(36)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#8D6E63;--cat-soft:rgb(239,235,233)">
+      <div class="card-head" onclick="toggleCard(61)">
+        <h3>팥빙 젤라또 파르페</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>우유빙수베이스 100ml</li><li>얼음 1컵</li><li>1번 버튼 갈갈갈</li><li>컵 바닥 빙수팥 1스쿱 탁탁탁</li><li>절반 담기</li><li>안쪽 벽 믹스씨리얼 2래들 삥~</li><li>나머지 담기</li><li>팥젤라또 1스쿱 토핑</li><li>나란히 빙수팥 1스쿱 토핑</li><li>빙수떡 1래들</li><li>믹스씨리얼 1래들</li><li>팥젤라또 위 연유드리즐</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(61)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(61)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#8E5BC8;--cat-soft:rgb(239,232,247)">
+      <div class="card-head" onclick="toggleCard(59)">
+        <h3>포도 녹차 젤리 크러쉬</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>물 100ml</li><li>포도그린티베이스 4.5P</li><li>얼음 1컵</li><li>1번 버튼 갈갈갈</li><li>그린알로에 워터젤리 컵 밑선</li><li>담기</li><li>잘 저어서 드세요</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(59)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(59)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#3BB8D8;--cat-soft:rgb(228,245,250)">
+      <div class="card-head" onclick="toggleCard(38)">
+        <h3>플레인 요거트 스무디</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>우유 250ml</li><li>요거트파우더 6래들</li><li>슈가시럽 1P</li><li>얼음 2스쿱</li><li>갈갈갈</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(38)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(38)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#C08A00;--cat-soft:rgb(246,239,219)">
+      <div class="card-head" onclick="toggleCard(52)">
+        <h3>플레인퐁 크러쉬</h3>
+        <span class="cat">스무디&amp;프라페</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>쿠키베이스 150ml</li><li>우유 150ml</li><li>슈가시럽 1P</li><li>죠리퐁 1컵</li><li>얼음 2스쿱</li><li>갈갈갈</li><li>컵 밑선 죠리퐁</li><li>담기</li><li>죠리퐁 가득 토핑</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(52)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(52)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
+      <div class="card-head" onclick="toggleCard(63)">
+        <h3>할메가 미숫 커피</h3>
+        <span class="cat">커피</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>할메가커피베이스 300ml</li><li>곡물파우더 3래들</li><li>갈갈갈</li><li>얼음</li><li>담기</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(63)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(63)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
+      <div class="card-head" onclick="toggleCard(15)">
+        <h3>할메가 커피  베이스</h3>
+        <span class="cat">베이스</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>뜨거운 물 1000ml</li><li>할커피파우더 400g</li><li>얼음 630g</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(15)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(15)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#8D6E63;--cat-soft:rgb(239,235,233)">
+      <div class="card-head" onclick="toggleCard(23)">
+        <h3>핫초코</h3>
+        <span class="cat">Non 커피 라떼</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>초코파우더 4래들</li><li>우유스팀</li><li>섞기</li><li>코코아파우더 톡톡</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(23)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(23)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#F25C4D;--cat-soft:rgb(253,232,230)">
+      <div class="card-head" onclick="toggleCard(31)">
+        <h3>허니 자몽 블랙티</h3>
+        <span class="cat">Tea</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>얼그레이티백 1개</li><li>자몽청 3래들</li><li>꿀 1래들</li><li>자몽슬라이스 1개</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(31)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(31)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
+      <div class="card-head" onclick="toggleCard(62)">
+        <h3>헛개리카노</h3>
+        <span class="cat">커피</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>에스프레소 2샷</li><li>헛개베이스 3P</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(62)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(62)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
       <div class="card-head" onclick="toggleCard(71)">
         <h3>흑당 밀크티 라떼</h3>
         <span class="cat">흑당</span>
@@ -369,7 +1525,7 @@
         </div>
       </div>
     </div>
-    <div class="recipe-card open" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
+    <div class="recipe-card" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
       <div class="card-head" onclick="toggleCard(70)">
         <h3>흑당라떼</h3>
         <span class="cat">흑당</span>
@@ -385,6 +1541,40 @@
           <button class="btn btn-danger btn-sm" onclick="deleteRecipe(70)">삭제</button>
         </div>
       </div>
+    </div>
+    <div class="recipe-card" style="--cat:#8CB832;--cat-soft:rgb(239,245,226)">
+      <div class="card-head" onclick="toggleCard(25)">
+        <h3>HOT 녹차라떼</h3>
+        <span class="cat">Non 커피 라떼</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>녹차파우더 2래들</li><li>우유스팀</li><li>섞기</li><li>녹차파우더 톡톡</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(25)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(25)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="recipe-card" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
+      <div class="card-head" onclick="toggleCard(9)">
+        <h3>HOT 카라멜마끼아또</h3>
+        <span class="cat">커피</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          <li>카라멜시럽 3P</li><li>에스프레소 2샷</li><li>우유스팀 두껍게</li><li>카라멜드리즐</li>
+        </ul>
+        
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(9)">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(9)">삭제</button>
+        </div>
+      </div>
     </div></div>
   </div>
 
@@ -394,15 +1584,8 @@
       <input type="text" id="fcSearchInput" placeholder="🔍 메뉴명 · 재료 · 카테고리 검색" oninput="fcDetail=null; fcApplyFilter()">
       <button class="search-clear" id="fcSearchClear" onclick="fcClearSearch()" style="display: none;">✕</button>
     </div>
-    <div class="cat-row" id="fcCatRow"><button class="cat-chip on" style="background:#41333F;color:#fff" data-cat="전체" onclick="setFcCat(this.dataset.cat)">전체</button><button class="cat-chip" style="background:rgb(239,235,233);color:#8D6E63" data-cat="커피" onclick="setFcCat(this.dataset.cat)">커피</button><button class="cat-chip" style="background:rgb(239,232,247);color:#8E5BC8" data-cat="Non 커피 라떼" onclick="setFcCat(this.dataset.cat)">Non 커피 라떼</button><button class="cat-chip" style="background:rgb(226,244,239);color:#2FB08C" data-cat="에이드" onclick="setFcCat(this.dataset.cat)">에이드</button><button class="cat-chip" style="background:rgb(253,234,239);color:#F26B8A" data-cat="스무디&amp;프라페" onclick="setFcCat(this.dataset.cat)">스무디&amp;프라페</button><button class="cat-chip" style="background:rgb(253,230,230);color:#EF4B4B" data-cat="주스" onclick="setFcCat(this.dataset.cat)">주스</button><button class="cat-chip" style="background:rgb(230,244,231);color:#4CAF50" data-cat="Tea" onclick="setFcCat(this.dataset.cat)">Tea</button><button class="cat-chip" style="background:rgb(246,239,219);color:#C08A00" data-cat="흑당" onclick="setFcCat(this.dataset.cat)">흑당</button><button class="cat-chip" style="background:rgb(230,227,226);color:#4E342E" data-cat="콜드브루" onclick="setFcCat(this.dataset.cat)">콜드브루</button><button class="cat-chip" style="background:rgb(230,237,250);color:#4A7FD9" data-cat="베이스" onclick="setFcCat(this.dataset.cat)">베이스</button></div>
-    <div id="flashArea"><div style="text-align:right;font-size:12px;color:var(--ink-soft);margin-bottom:8px">70개 메뉴</div>
-    <div class="recipe-card" style="--cat:#C08A00;--cat-soft:rgb(246,239,219)">
-      <div class="card-head" onclick="fcOpenDetail(37)">
-        <h3>곡물 라떼</h3>
-        <span class="cat">Non 커피 라떼</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
+    <div class="cat-row" id="fcCatRow"><button class="cat-chip" style="background:rgb(228,226,228);color:#41333F" data-cat="전체" onclick="setFcCat(this.dataset.cat)">전체</button><button class="cat-chip" style="background:rgb(239,235,233);color:#8D6E63" data-cat="커피" onclick="setFcCat(this.dataset.cat)">커피</button><button class="cat-chip" style="background:rgb(239,232,247);color:#8E5BC8" data-cat="Non 커피 라떼" onclick="setFcCat(this.dataset.cat)">Non 커피 라떼</button><button class="cat-chip" style="background:rgb(226,244,239);color:#2FB08C" data-cat="에이드" onclick="setFcCat(this.dataset.cat)">에이드</button><button class="cat-chip on" style="background:#F26B8A;color:#fff" data-cat="스무디&amp;프라페" onclick="setFcCat(this.dataset.cat)">스무디&amp;프라페</button><button class="cat-chip" style="background:rgb(253,230,230);color:#EF4B4B" data-cat="주스" onclick="setFcCat(this.dataset.cat)">주스</button><button class="cat-chip" style="background:rgb(230,244,231);color:#4CAF50" data-cat="Tea" onclick="setFcCat(this.dataset.cat)">Tea</button><button class="cat-chip" style="background:rgb(246,239,219);color:#C08A00" data-cat="흑당" onclick="setFcCat(this.dataset.cat)">흑당</button><button class="cat-chip" style="background:rgb(230,227,226);color:#4E342E" data-cat="콜드브루" onclick="setFcCat(this.dataset.cat)">콜드브루</button><button class="cat-chip" style="background:rgb(230,237,250);color:#4A7FD9" data-cat="베이스" onclick="setFcCat(this.dataset.cat)">베이스</button></div>
+    <div id="flashArea"><div style="text-align:right;font-size:12px;color:var(--ink-soft);margin-bottom:8px">28개 메뉴</div>
     <div class="recipe-card" style="--cat:#FFB300;--cat-soft:rgb(255,244,219)">
       <div class="card-head" onclick="fcOpenDetail(42)">
         <h3>골드 망고 스무디</h3>
@@ -410,24 +1593,10 @@
         <span class="chev" style="transform:rotate(-90deg)">▼</span>
       </div>
     </div>
-    <div class="recipe-card" style="--cat:#F25C4D;--cat-soft:rgb(253,232,230)">
+    <div class="recipe-card" style="--cat:#F58220;--cat-soft:rgb(254,238,224)">
       <div class="card-head" onclick="fcOpenDetail(69)">
         <h3>귤 톡톡 젤리 스무디</h3>
         <span class="cat">스무디&amp;프라페</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#E91E63;--cat-soft:rgb(252,224,233)">
-      <div class="card-head" onclick="fcOpenDetail(6)">
-        <h3>꿀 수박 주스</h3>
-        <span class="cat">주스</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#4CAF50;--cat-soft:rgb(230,244,231)">
-      <div class="card-head" onclick="fcOpenDetail(11)">
-        <h3>녹차 베이스</h3>
-        <span class="cat">베이스</span>
         <span class="chev" style="transform:rotate(-90deg)">▼</span>
       </div>
     </div>
@@ -435,13 +1604,6 @@
       <div class="card-head" onclick="fcOpenDetail(48)">
         <h3>녹차 프라페</h3>
         <span class="cat">스무디&amp;프라페</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#EF4B4B;--cat-soft:rgb(253,230,230)">
-      <div class="card-head" onclick="fcOpenDetail(57)">
-        <h3>딸기 바나나 주스</h3>
-        <span class="cat">주스</span>
         <span class="chev" style="transform:rotate(-90deg)">▼</span>
       </div>
     </div>
@@ -460,44 +1622,9 @@
       </div>
     </div>
     <div class="recipe-card" style="--cat:#E91E63;--cat-soft:rgb(252,224,233)">
-      <div class="card-head" onclick="fcOpenDetail(34)">
-        <h3>딸기라떼</h3>
-        <span class="cat">Non 커피 라떼</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#E91E63;--cat-soft:rgb(252,224,233)">
       <div class="card-head" onclick="fcOpenDetail(54)">
         <h3>딸기퐁 크러쉬</h3>
         <span class="cat">스무디&amp;프라페</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#8CB832;--cat-soft:rgb(239,245,226)">
-      <div class="card-head" onclick="fcOpenDetail(8)">
-        <h3>라임 모히또</h3>
-        <span class="cat">에이드</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#FFB300;--cat-soft:rgb(255,244,219)">
-      <div class="card-head" onclick="fcOpenDetail(18)">
-        <h3>레몬에이드</h3>
-        <span class="cat">에이드</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#FFB300;--cat-soft:rgb(255,244,219)">
-      <div class="card-head" onclick="fcOpenDetail(29)">
-        <h3>레몬차</h3>
-        <span class="cat">Tea</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#F7907B;--cat-soft:rgb(254,239,237)">
-      <div class="card-head" onclick="fcOpenDetail(35)">
-        <h3>로얄 밀크티</h3>
-        <span class="cat">Non 커피 라떼</span>
         <span class="chev" style="transform:rotate(-90deg)">▼</span>
       </div>
     </div>
@@ -519,13 +1646,6 @@
       <div class="card-head" onclick="fcOpenDetail(60)">
         <h3>멋쟁이 토마토 스무디</h3>
         <span class="cat">스무디&amp;프라페</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#F25C4D;--cat-soft:rgb(253,232,230)">
-      <div class="card-head" onclick="fcOpenDetail(5)">
-        <h3>메가 에이드</h3>
-        <span class="cat">에이드</span>
         <span class="chev" style="transform:rotate(-90deg)">▼</span>
       </div>
     </div>
@@ -557,31 +1677,10 @@
         <span class="chev" style="transform:rotate(-90deg)">▼</span>
       </div>
     </div>
-    <div class="recipe-card" style="--cat:#4A7FD9;--cat-soft:rgb(230,237,250)">
-      <div class="card-head" onclick="fcOpenDetail(19)">
-        <h3>블루레몬에이드</h3>
-        <span class="cat">에이드</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
     <div class="recipe-card" style="--cat:#5C6BC0;--cat-soft:rgb(232,234,246)">
       <div class="card-head" onclick="fcOpenDetail(2)">
         <h3>블루베리 요거트 스무디</h3>
         <span class="cat">스무디&amp;프라페</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#E91E63;--cat-soft:rgb(252,224,233)">
-      <div class="card-head" onclick="fcOpenDetail(32)">
-        <h3>사과 유자차</h3>
-        <span class="cat">Tea</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#F7907B;--cat-soft:rgb(254,239,237)">
-      <div class="card-head" onclick="fcOpenDetail(66)">
-        <h3>상큼 리치티</h3>
-        <span class="cat">Tea</span>
         <span class="chev" style="transform:rotate(-90deg)">▼</span>
       </div>
     </div>
@@ -599,66 +1698,10 @@
         <span class="chev" style="transform:rotate(-90deg)">▼</span>
       </div>
     </div>
-    <div class="recipe-card" style="--cat:#8CB832;--cat-soft:rgb(239,245,226)">
-      <div class="card-head" onclick="fcOpenDetail(24)">
-        <h3>아이스 녹차라떼</h3>
-        <span class="cat">Non 커피 라떼</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#8D6E63;--cat-soft:rgb(239,235,233)">
-      <div class="card-head" onclick="fcOpenDetail(22)">
-        <h3>아이스 초코</h3>
-        <span class="cat">Non 커피 라떼</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
-      <div class="card-head" onclick="fcOpenDetail(10)">
-        <h3>아이스 카라멜마끼아또</h3>
-        <span class="cat">커피</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#F25C4D;--cat-soft:rgb(253,232,230)">
-      <div class="card-head" onclick="fcOpenDetail(14)">
-        <h3>아이스티 베이스</h3>
-        <span class="cat">베이스</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
     <div class="recipe-card" style="--cat:#4CAF50;--cat-soft:rgb(230,244,231)">
       <div class="card-head" onclick="fcOpenDetail(1)">
         <h3>애플 머스캣 요거트 스무디</h3>
         <span class="cat">스무디&amp;프라페</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#8D6E63;--cat-soft:rgb(239,235,233)">
-      <div class="card-head" onclick="fcOpenDetail(44)">
-        <h3>오레오 초코라떼</h3>
-        <span class="cat">Non 커피 라떼</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#E91E63;--cat-soft:rgb(252,224,233)">
-      <div class="card-head" onclick="fcOpenDetail(65)">
-        <h3>왕 메가 사과 유자차</h3>
-        <span class="cat">Tea</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
-      <div class="card-head" onclick="fcOpenDetail(68)">
-        <h3>왕메가 헛개리카노</h3>
-        <span class="cat">커피</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#5C6BC0;--cat-soft:rgb(232,234,246)">
-      <div class="card-head" onclick="fcOpenDetail(58)">
-        <h3>유니콘 매직 에이드 (블루)</h3>
-        <span class="cat">에이드</span>
         <span class="chev" style="transform:rotate(-90deg)">▼</span>
       </div>
     </div>
@@ -669,13 +1712,6 @@
         <span class="chev" style="transform:rotate(-90deg)">▼</span>
       </div>
     </div>
-    <div class="recipe-card" style="--cat:#FFB300;--cat-soft:rgb(255,244,219)">
-      <div class="card-head" onclick="fcOpenDetail(28)">
-        <h3>유자차</h3>
-        <span class="cat">Tea</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
     <div class="recipe-card" style="--cat:#EF4B4B;--cat-soft:rgb(253,230,230)">
       <div class="card-head" onclick="fcOpenDetail(3)">
         <h3>자몽 톡톡 스무디</h3>
@@ -683,80 +1719,10 @@
         <span class="chev" style="transform:rotate(-90deg)">▼</span>
       </div>
     </div>
-    <div class="recipe-card" style="--cat:#EF4B4B;--cat-soft:rgb(253,230,230)">
-      <div class="card-head" onclick="fcOpenDetail(20)">
-        <h3>자몽에이드</h3>
-        <span class="cat">에이드</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#F25C4D;--cat-soft:rgb(253,232,230)">
-      <div class="card-head" onclick="fcOpenDetail(30)">
-        <h3>자몽차</h3>
-        <span class="cat">Tea</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#DFAF1F;--cat-soft:rgb(251,244,224)">
-      <div class="card-head" onclick="fcOpenDetail(7)">
-        <h3>저당 꿀배 XO 야쿠르트</h3>
-        <span class="cat">에이드</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#8CB832;--cat-soft:rgb(239,245,226)">
-      <div class="card-head" onclick="fcOpenDetail(21)">
-        <h3>제로 레몬 말차 아이스티</h3>
-        <span class="cat">에이드</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#DFAF1F;--cat-soft:rgb(251,244,224)">
-      <div class="card-head" onclick="fcOpenDetail(4)">
-        <h3>제로 부스트 에이드</h3>
-        <span class="cat">에이드</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#F7907B;--cat-soft:rgb(254,239,237)">
-      <div class="card-head" onclick="fcOpenDetail(33)">
-        <h3>제로 슈가 아이스티</h3>
-        <span class="cat">Tea</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#E91E63;--cat-soft:rgb(252,224,233)">
-      <div class="card-head" onclick="fcOpenDetail(13)">
-        <h3>체리 베이스</h3>
-        <span class="cat">베이스</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#E91E63;--cat-soft:rgb(252,224,233)">
-      <div class="card-head" onclick="fcOpenDetail(17)">
-        <h3>체리콕</h3>
-        <span class="cat">에이드</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
     <div class="recipe-card" style="--cat:#FFB300;--cat-soft:rgb(255,244,219)">
       <div class="card-head" onclick="fcOpenDetail(67)">
         <h3>초당 옥수수 스무디</h3>
         <span class="cat">스무디&amp;프라페</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#8D6E63;--cat-soft:rgb(239,235,233)">
-      <div class="card-head" onclick="fcOpenDetail(12)">
-        <h3>초코 베이스</h3>
-        <span class="cat">베이스</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#8D6E63;--cat-soft:rgb(239,235,233)">
-      <div class="card-head" onclick="fcOpenDetail(26)">
-        <h3>초코 젤라또 말차 라떼</h3>
-        <span class="cat">Non 커피 라떼</span>
         <span class="chev" style="transform:rotate(-90deg)">▼</span>
       </div>
     </div>
@@ -781,31 +1747,10 @@
         <span class="chev" style="transform:rotate(-90deg)">▼</span>
       </div>
     </div>
-    <div class="recipe-card" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
-      <div class="card-head" onclick="fcOpenDetail(27)">
-        <h3>콜드브루</h3>
-        <span class="cat">콜드브루</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#3BB8D8;--cat-soft:rgb(228,245,250)">
-      <div class="card-head" onclick="fcOpenDetail(16)">
-        <h3>쿠키 베이스</h3>
-        <span class="cat">베이스</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
     <div class="recipe-card" style="--cat:#8D6E63;--cat-soft:rgb(239,235,233)">
       <div class="card-head" onclick="fcOpenDetail(45)">
         <h3>쿠키 프라페</h3>
         <span class="cat">스무디&amp;프라페</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#8D6E63;--cat-soft:rgb(239,235,233)">
-      <div class="card-head" onclick="fcOpenDetail(36)">
-        <h3>토피넛라떼</h3>
-        <span class="cat">Non 커피 라떼</span>
         <span class="chev" style="transform:rotate(-90deg)">▼</span>
       </div>
     </div>
@@ -836,55 +1781,6 @@
         <span class="cat">스무디&amp;프라페</span>
         <span class="chev" style="transform:rotate(-90deg)">▼</span>
       </div>
-    </div>
-    <div class="recipe-card" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
-      <div class="card-head" onclick="fcOpenDetail(63)">
-        <h3>할메가 미숫 커피</h3>
-        <span class="cat">커피</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
-      <div class="card-head" onclick="fcOpenDetail(15)">
-        <h3>할메가 커피  베이스</h3>
-        <span class="cat">베이스</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#8D6E63;--cat-soft:rgb(239,235,233)">
-      <div class="card-head" onclick="fcOpenDetail(23)">
-        <h3>핫초코</h3>
-        <span class="cat">Non 커피 라떼</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#F25C4D;--cat-soft:rgb(253,232,230)">
-      <div class="card-head" onclick="fcOpenDetail(31)">
-        <h3>허니 자몽 블랙티</h3>
-        <span class="cat">Tea</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
-      <div class="card-head" onclick="fcOpenDetail(62)">
-        <h3>헛개리카노</h3>
-        <span class="cat">커피</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#8CB832;--cat-soft:rgb(239,245,226)">
-      <div class="card-head" onclick="fcOpenDetail(25)">
-        <h3>HOT 녹차라떼</h3>
-        <span class="cat">Non 커피 라떼</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
-    </div>
-    <div class="recipe-card" style="--cat:#4E342E;--cat-soft:rgb(230,227,226)">
-      <div class="card-head" onclick="fcOpenDetail(9)">
-        <h3>HOT 카라멜마끼아또</h3>
-        <span class="cat">커피</span>
-        <span class="chev" style="transform:rotate(-90deg)">▼</span>
-      </div>
     </div></div>
   </div>
 
@@ -892,16 +1788,16 @@
   <div class="panel" id="panel-quiz">
     <div id="quizArea">
     <div class="cup">
-      <div class="glass"><div class="liquid" style="width:60%"></div></div>
-      <div class="label">7/10</div>
+      <div class="glass"><div class="liquid" style="width:70%"></div></div>
+      <div class="label">8/10</div>
     </div>
     <div class="q-box">
       <div class="q-type">빈칸 채우기</div>
-      <div class="q-text">"민트 프라페" — 빈칸 ①에 들어갈 양은?</div>
-      <div class="q-ing">우유 <span class="blank active">①</span><br>민트파우더 5래들<br>민트시럽 3P<br>초콜릿칩 1래들<br>얼음 2스쿱<br><span class="blank">②</span><br>휘핑<br>딸기 분태 톡톡톡</div>
+      <div class="q-text">"코코넛 커피 스무디" — 빈칸 ①에 들어갈 재료는?</div>
+      <div class="q-ing">코코넛베이스 250ml<br><span class="blank active">①</span> 1래들<br>얼음 2스쿱<br>갈갈갈<br>컵 바닥 식힌 샷 50ml<br><span class="blank">②</span><br>코코넛칩 1래들 토핑</div>
     </div>
     <div class="choices" id="choices">
-      <button class="choice" onclick="answer(this,'4P')">4P</button><button class="choice" onclick="answer(this,'1래들 토핌')">1래들 토핌</button><button class="choice" onclick="answer(this,'1봉')">1봉</button><button class="choice" onclick="answer(this,'150ml')">150ml</button>
+      <button class="choice" onclick="answer(this,'코코넛칩')">코코넛칩</button><button class="choice" onclick="answer(this,'사이다')">사이다</button><button class="choice" onclick="answer(this,'로즈마리')">로즈마리</button><button class="choice" onclick="answer(this,'블루베리베이스')">블루베리베이스</button>
     </div>
     <div class="q-next" id="qNext"></div></div>
   </div>
@@ -935,6 +1831,9 @@ function saveRecipes(){
 }
 function exportForPhone(){
   // 현재 레시피를 파일 안에 심어서 index.html로 다운로드
+  closeForm();          // 폼이 열린 채로 파일에 굳지 않게 먼저 닫기
+  listDetail = null;    // 목록 화면 상태로 저장
+  renderList();
   const json = JSON.stringify(recipes).replace(/<\//g, '<\\/');
   let html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
   html = html.replace(
@@ -1006,7 +1905,7 @@ function renderCatRows(){
   document.getElementById('listCatRow').innerHTML = mk(listCat, 'setListCat');
   document.getElementById('fcCatRow').innerHTML = mk(fcCat, 'setFcCat');
 }
-function setListCat(c){ listCat = c; openCards.clear(); renderCatRows(); renderList(); }
+function setListCat(c){ listCat = c; listDetail = null; renderCatRows(); renderList(); }
 function setFcCat(c){ fcCat = c; fcDetail = null; renderCatRows(); fcApplyFilter(); }
 
 // 검색 개선: 이름·카테고리·재료명·용량·만드는법 모두 검색, 띄어쓰기 무시, 여러 단어 AND 검색
@@ -1026,6 +1925,30 @@ function renderList(){
     box.innerHTML = '<div class="empty">아직 레시피가 없어요.<br>"+ 레시피 추가"를 눌러 첫 레시피를 등록해보세요!</div>';
     return;
   }
+  // ── 메뉴 하나만 보기 (클릭한 메뉴) ──
+  if(listDetail !== null && recipes[listDetail]){
+    const r = recipes[listDetail];
+    box.innerHTML = `
+    <button class="btn btn-line btn-sm" style="margin-bottom:12px" onclick="listBackToList()">◀ 목록으로</button>
+    <div class="recipe-card open" style="${catStyle(r)}">
+      <div class="card-head">
+        <h3>${esc(r.name)}</h3>
+        ${r.cat ? `<span class="cat">${esc(r.cat)}</span>` : ''}
+      </div>
+      <div class="card-body">
+        <ul class="ing-list">
+          ${r.ing.map(x=>`<li>${esc((x[0]+' '+x[1]).trim())}</li>`).join('')}
+        </ul>
+        ${r.steps ? `<div class="steps">${esc(r.steps)}</div>` : ''}
+        <div class="card-actions">
+          <button class="btn btn-line btn-sm" onclick="openForm(${listDetail})">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(${listDetail})">삭제</button>
+        </div>
+      </div>
+    </div>`;
+    return;
+  }
+
   const shown = recipes
     .map((r,i)=>({r,i}))
     .filter(({r})=>{
@@ -1040,25 +1963,27 @@ function renderList(){
     return;
   }
   box.innerHTML = shown.map(({r,i})=>`
-    <div class="recipe-card${openCards.has(i)?' open':''}" style="${catStyle(r)}">
-      <div class="card-head" onclick="toggleCard(${i})">
+    <div class="recipe-card" style="${catStyle(r)}">
+      <div class="card-head" onclick="listOpenDetail(${i})">
         <h3>${esc(r.name)}</h3>
         ${r.cat ? `<span class="cat">${esc(r.cat)}</span>` : ''}
-        <span class="chev">▼</span>
-      </div>
-      <div class="card-body">
-        <ul class="ing-list">
-          ${r.ing.map(x=>`<li>${esc((x[0]+' '+x[1]).trim())}</li>`).join('')}
-        </ul>
-        ${r.steps ? `<div class="steps">${esc(r.steps)}</div>` : ''}
-        <div class="card-actions">
-          <button class="btn btn-line btn-sm" onclick="openForm(${i})">수정</button>
-          <button class="btn btn-danger btn-sm" onclick="deleteRecipe(${i})">삭제</button>
-        </div>
+        <span class="chev" style="transform:rotate(-90deg)">▼</span>
       </div>
     </div>`).join('');
 }
-// ── 카드 펼침 상태 관리 ──
+// ── 메뉴 하나만 보기 상태 관리 ──
+let listDetail = null;
+function listOpenDetail(i){
+  listDetail = i;
+  closeForm();
+  renderList();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function listBackToList(){
+  listDetail = null;
+  closeForm();
+  renderList();
+}
 let openCards = new Set();
 function toggleCard(i){
   if(openCards.has(i)) openCards.delete(i);
@@ -1073,7 +1998,7 @@ function deleteRecipe(i){
   const name = recipes[i] ? recipes[i].name : '';
   if(!confirm(`"${name}" 레시피를 삭제할까요?\n삭제하면 되돌릴 수 없어요.`)) return;
   recipes.splice(i, 1);
-  openCards.clear();
+  listDetail = null;
   saveRecipes(); // 자동 저장
   closeForm();   // 혹시 수정 창이 열려 있으면 닫기 (번호가 밀리는 것 방지)
   renderCatRows();
